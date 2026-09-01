@@ -37,3 +37,18 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+// Pastilles d'état des documents. Globales parce qu'elles servent aux devis,
+// aux factures et aux commandes fournisseur — trois composants distincts.
+.state-pill {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 1rem;
+  font: var(--mat-sys-label-small);
+  white-space: nowrap;
+}
+
+.state-brouillon { background: #e0e0e0; color: #424242; }
+.state-envoye    { background: #cfe3ff; color: #0b4a91; }
+.state-accepte   { background: #cdeccd; color: #1b5e20; }
+.state-refuse    { background: #ffd6d6; color: #8e1414; }
