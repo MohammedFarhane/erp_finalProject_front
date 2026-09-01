@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.shell-toolbar {
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.shell-brand {
+  font: var(--mat-sys-title-medium);
+}
+
+// Pousse tout ce qui suit vers la droite de la barre.
+.shell-spacer {
+  flex: 1;
+}
+
+.shell-email {
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.shell-body {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  flex: 1;
+  // Sans cette ligne, un enfant de flex refuse de rétrécir sous sa taille de
+  // contenu : les deux colonnes déborderaient au lieu de défiler.
+  min-height: 0;
+}
+
+.shell-nav {
+  overflow-y: auto;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+}
+
+.shell-content {
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.shell-link-active {
+  background-color: var(--mat-sys-secondary-container);
+}
+
+@media (max-width: 60rem) {
+  .shell-body {
+    grid-template-columns: 4rem 1fr;
+  }
+
+  .shell-nav [matListItemTitle] {
+    display: none;
+  }
+}
