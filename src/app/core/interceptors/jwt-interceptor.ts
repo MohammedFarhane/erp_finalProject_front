@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from './auth-service';
-import { LOGIN_URL } from '../shared/api';
+import { AuthService } from '../services/auth-service';
+import { LOGIN_URL } from '../api';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 

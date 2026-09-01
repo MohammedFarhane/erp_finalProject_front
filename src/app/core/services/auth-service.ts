@@ -1,8 +1,8 @@
 import { computed, inject, Service, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, LoginResponse } from './auth';
+import { LoginRequest, LoginResponse } from '../models/auth';
 import { Observable, tap } from 'rxjs';
-import { LOGIN_URL } from '../shared/api';
+import { LOGIN_URL } from '../api';
 
 const STORAGE_KEY = 'erp_user'
 
