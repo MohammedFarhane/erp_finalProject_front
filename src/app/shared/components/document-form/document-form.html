@@ -1,0 +1,55 @@
+<div class="doc-page">
+  <a [routerLink]="config().cancelLink" class="doc-back">
+    <mat-icon>arrow_back</mat-icon> Retour
+  </a>
+
+  <h1>{{ config().title }}</h1>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="doc-form">
+    <div class="doc-head">
+      <mat-form-field class="doc-partner">
+        <mat-label>{{ config().partnerLabel }}</mat-label>
+        <mat-select formControlName="partnerId">
+          @for (partner of partners(); track partner.id) {
+            <mat-option [value]="partner.id">{{ partner.name }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.partnerId.hasError('required')) {
+          <mat-error>Ce champ est obligatoire.</mat-error>
+        }
+      </mat-form-field>
+
+      @if (config().withDiscount ?? true) {
+        <mat-form-field class="doc-discount">
+          <mat-label>Remise</mat-label>
+          <input matInput type="number" min="0" max="100" formControlName="discount" />
+          <span matTextSuffix>%</span>
+          @if (form.controls.discount.invalid) {
+            <mat-error>Entre 0 et 100.</mat-error>
+          }
+        </mat-form-field>
+      }
+    </div>
+
+    <app-line-editor
+      [lines]="form.controls.lines"
+      [products]="products()"
+      [priceField]="config().priceField ?? 'sellingPrice'"
+    />
+
+    @if (errorMessage()) {
+      <p class="doc-error">{{ errorMessage() }}</p>
+    }
+
+    <div class="doc-actions">
+      <a matButton="text" [routerLink]="config().cancelLink">Annuler</a>
+      <button matButton="filled" type="submit" [disabled]="busy()">
+        {{ config().submitLabel }}
+      </button>
+    </div>
+  </form>
+</div>

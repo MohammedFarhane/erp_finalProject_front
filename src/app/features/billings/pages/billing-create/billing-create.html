@@ -1,0 +1,9 @@
+<app-document-form
+  [config]="config"
+  [partners]="clients.value().content"
+  [products]="products.value().content"
+  [loading]="clients.isLoading() || products.isLoading()"
+  [busy]="busy()"
+  [errorMessage]="errorMessage()"
+  (submitted)="create($event)"
+/>
