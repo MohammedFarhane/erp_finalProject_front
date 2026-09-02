@@ -9,8 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () =>
-      import('./features/auth/pages/login/login').then((m) => m.Login),
+    loadComponent: () => import('./features/auth/pages/login/login').then((m) => m.Login),
   },
   {
     path: '',
@@ -37,6 +36,20 @@ export const routes: Routes = [
         path: 'quotes/:id',
         loadComponent: () =>
           import('./features/quotes/pages/quote-details/quote-details').then((m) => m.QuoteDetails),
+      },
+      {
+        path: 'billings/new',
+        loadComponent: () =>
+          import('./features/billings/pages/billing-create/billing-create').then(
+            (m) => m.BillingCreate,
+          ),
+      },
+      {
+        path: 'purchase-orders/new',
+        loadComponent: () =>
+          import('./features/purchase-order/pages/purchase-order-create/purchase-order-create').then(
+            (m) => m.PurchaseOrderCreate,
+          ),
       },
     ],
   },
