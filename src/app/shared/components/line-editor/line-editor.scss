@@ -1,0 +1,35 @@
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.line-product {
+  flex: 1 1 20rem;
+}
+
+.line-quantity {
+  flex: 0 0 8rem;
+}
+
+.line-stock {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.lines-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lines-estimate {
+  margin: 0;
+  color: var(--mat-sys-on-surface-variant);
+}

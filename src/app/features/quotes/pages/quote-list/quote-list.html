@@ -1,5 +1,10 @@
 <div>
-  <h1>Devis</h1>
+  <header class="quotes-header">
+    <h1>Devis</h1>
+    <a matButton="filled" routerLink="/quotes/new">
+      <mat-icon>add</mat-icon> Nouveau devis
+    </a>
+  </header>
 
   <form class="quotes-filter" [formGroup]="filterForm">
     <mat-form-field>

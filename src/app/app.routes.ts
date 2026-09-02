@@ -9,7 +9,8 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./features/auth/pages/login/login').then((m) => m.Login),
+    loadComponent: () =>
+      import('./features/auth/pages/login/login').then((m) => m.Login),
   },
   {
     path: '',
@@ -26,6 +27,11 @@ export const routes: Routes = [
         path: 'quotes',
         loadComponent: () =>
           import('./features/quotes/pages/quote-list/quote-list').then((m) => m.QuoteList),
+      },
+      {
+        path: 'quotes/new',
+        loadComponent: () =>
+          import('./features/quotes/pages/quote-create/quote-create').then((m) => m.QuoteCreate),
       },
       {
         path: 'quotes/:id',

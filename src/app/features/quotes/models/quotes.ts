@@ -1,3 +1,5 @@
+import { LineRequest } from '../../../shared/components/line-editor/line-editor';
+
 export type QuoteState = 'BROUILLON' | 'ENVOYE' | 'ACCEPTE' | 'REFUSE'
 
 export interface QuoteSummary {
@@ -41,4 +43,10 @@ export interface QuoteDetail {
   clientName: string;
   userId: number;
   lines: QuoteLine[];
+}
+
+export interface QuoteRequest {
+  clientId: number;
+  discount: number; // pourcentage : 10 = 10 %
+  lines: LineRequest[];
 }

@@ -6,13 +6,6 @@
   gap: 1rem;
 }
 
-h1 {
-  margin: 0;
-  padding-bottom: 1rem;
-  font: var(--mat-sys-headline-small);
-  border-bottom: 2px solid var(--mat-sys-primary);
-}
-
 .quotes-filter {
   display: flex;
   flex-wrap: wrap;
@@ -62,4 +55,18 @@ h1 {
   border-radius: var(--mat-sys-corner-medium);
   background: var(--mat-sys-error-container);
   color: var(--mat-sys-on-error-container);
+}
+
+.quotes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--mat-sys-primary);
+}
+
+h1 {
+  margin: 0;
+  font: var(--mat-sys-headline-small);
 }

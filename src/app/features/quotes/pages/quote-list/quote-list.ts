@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { QuoteService } from '../../service/quote-service';
+import { QuoteService } from '../../services/quote-service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { QuoteState } from '../../models/quotes';
 import { debounceTime } from 'rxjs';
@@ -21,6 +21,8 @@ import {
   MatTable,
 } from '@angular/material/table';
 import { DecimalPipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   imports: [
@@ -43,6 +45,8 @@ import { DecimalPipe } from '@angular/common';
     MatHeaderRowDef,
     MatRowDef,
     RouterLink,
+    MatIcon,
+    MatButton,
   ],
   selector: 'app-quote-list',
   styleUrl: './quote-list.scss',

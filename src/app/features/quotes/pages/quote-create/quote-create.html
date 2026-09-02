@@ -1,0 +1,47 @@
+<div class="create-page">
+  <a routerLink="/quotes" class="create-back">
+    <mat-icon>arrow_back</mat-icon> Retour à la liste
+  </a>
+
+  <h1>Nouveau devis</h1>
+
+  @if (clients.isLoading() || products.isLoading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="create-form">
+    <div class="create-head">
+      <mat-form-field class="create-client">
+        <mat-label>Client</mat-label>
+        <mat-select formControlName="clientId">
+          @for (client of clients.value().content; track client.id) {
+            <mat-option [value]="client.id">{{ client.name }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.clientId.hasError('required')) {
+          <mat-error>Choisissez un client.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="create-discount">
+        <mat-label>Remise</mat-label>
+        <input matInput type="number" min="0" max="100" formControlName="discount" />
+        <span matTextSuffix>%</span>
+        @if (form.controls.discount.invalid) {
+          <mat-error>Entre 0 et 100.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <app-line-editor [lines]="form.controls.lines" [products]="products.value().content" />
+
+    @if (errorMessage()) {
+      <p class="create-error">{{ errorMessage() }}</p>
+    }
+
+    <div class="create-actions">
+      <a matButton="text" routerLink="/quotes">Annuler</a>
+      <button matButton="filled" type="submit" [disabled]="busy()">Créer le devis</button>
+    </div>
+  </form>
+</div>

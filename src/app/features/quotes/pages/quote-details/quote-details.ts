@@ -1,6 +1,6 @@
 import { Component, inject, input, numberAttribute, signal } from '@angular/core';
 import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog';
-import { QuoteService } from '../../service/quote-service';
+import { QuoteService } from '../../services/quote-service';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';

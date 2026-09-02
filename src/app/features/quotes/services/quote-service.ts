@@ -1,8 +1,9 @@
 import { inject, Service, Signal } from '@angular/core';
 import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
-import { QuoteDetail, QuoteFilters, QuoteSummary } from '../models/quotes';
+import { QuoteDetail, QuoteFilters, QuoteRequest, QuoteSummary } from '../models/quotes';
 import { Page } from '../../../core/models/page';
-import { API_URL } from '../../../core/api';
+import { API_URL, idFromLocation } from '../../../core/api';
+import { map } from 'rxjs';
 
 const PAGE_SIZE = 10;
 
@@ -50,6 +51,14 @@ export class QuoteService {
       responseType: 'blob',
       observe: 'response',
     });
+  }
+
+  create(request: QuoteRequest) {
+    // `observe: 'response'` est indispensable : le corps est vide, tout est
+    // dans les en-têtes.
+    return this.http
+      .post(`${API_URL}/quote`, request, { observe: 'response' })
+      .pipe(map(idFromLocation));
   }
 }
 

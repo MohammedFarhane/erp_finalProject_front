@@ -9,8 +9,12 @@ export interface Page<T> {
 }
 
 export interface ProblemDetail {
-  status : number;
-  title : string;
-  detail : string;
+  status: number;
+  title: string;
+  detail: string;
   errors?: Record<string, string>;
 }
+
+export function emptyPage<T>(): Page<T> {
+  return { content: [], page: { size: 0, number: 0, totalElements: 0, totalPages: 0 } };
+} 

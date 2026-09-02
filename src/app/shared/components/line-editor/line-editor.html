@@ -1,0 +1,60 @@
+<div class="lines">
+  @for (line of lines().controls; track line) {
+    @let product = line.controls.product;
+    @let quantity = line.controls.quantity;
+
+    <div class="line" [formGroup]="line">
+      <mat-form-field class="line-product">
+        <mat-label>Produit</mat-label>
+        <input
+          matInput
+          formControlName="product"
+          [matAutocomplete]="auto"
+          placeholder="Tapez pour rechercher…"
+        />
+
+        <mat-autocomplete #auto [displayWith]="displayProduct">
+          @for (p of optionsFor(line); track p.id) {
+            <mat-option [value]="p">
+              {{ p.name }} — {{ p[priceField()] | number: '1.2-2' }} €
+              <span class="line-stock">stock {{ p.stock }}</span>
+            </mat-option>
+          }
+        </mat-autocomplete>
+
+        @if (product.hasError('productRequired')) {
+          <mat-error>Choisissez un produit dans la liste.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="line-quantity">
+        <mat-label>Quantité</mat-label>
+        <input matInput type="number" min="1" formControlName="quantity" />
+        @if (quantity.hasError('min')) {
+          <mat-error>Au moins 1.</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        matIconButton
+        type="button"
+        aria-label="Supprimer la ligne"
+        [disabled]="lines().length === 1"
+        (click)="removeLine($index)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  }
+</div>
+
+<div class="lines-footer">
+  <button matButton="text" type="button" (click)="addLine()">
+    <mat-icon>add</mat-icon> Ajouter une ligne
+  </button>
+
+  <p class="lines-estimate">
+    Estimation hors remise et TVA :
+    <strong>{{ estimate() | number: '1.2-2' }} €</strong>
+  </p>
+</div>
