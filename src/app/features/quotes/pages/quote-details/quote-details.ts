@@ -4,16 +4,24 @@ import { QuoteService } from '../../services/quote-service';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { MatProgressBar } from '@angular/material/progress-bar';
-import { MatButton } from '@angular/material/button';
-import { QuoteDetail } from '../../models/quotes';
+import { QuoteDetail } from '../../models/quote';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
-  imports: [MatTableModule, RouterLink, MatIcon, DecimalPipe, DatePipe, MatProgressBar, MatButton],
+  imports: [
+    RouterLink,
+    DatePipe,
+    DecimalPipe,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+  ],
   selector: 'app-quote-details',
   styleUrl: './quote-details.scss',
   templateUrl: './quote-details.html',
@@ -50,7 +58,7 @@ export class QuoteDetails {
   refuse(): void {
     this.confirm({
       title: 'Refuser ce devis ?',
-      message: 'Cette action est irreversible.',
+      message: 'Cette action est irréversible.',
       confirmLabel: 'Refuser',
     }).subscribe((confirmed) => {
       if (confirmed) {
@@ -60,8 +68,12 @@ export class QuoteDetails {
   }
 
   openPdf(): void {
+    this.busy.set(true);
+    this.errorMessage.set(null);
+
     this.quoteService.downloadPdf(this.id()).subscribe({
       next: (response) => {
+        this.busy.set(false);
         const url = URL.createObjectURL(response.body!);
         const link = document.createElement('a');
         link.href = url;
@@ -69,7 +81,10 @@ export class QuoteDetails {
         link.click();
         URL.revokeObjectURL(url);
       },
-      error: () => this.errorMessage.set("Le PDF n'a pas pu être généré."),
+      error: () => {
+        this.busy.set(false);
+        this.errorMessage.set("Le PDF n'a pas pu être généré.");
+      },
     });
   }
 

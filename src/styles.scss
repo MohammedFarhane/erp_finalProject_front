@@ -52,3 +52,15 @@ body {
 .state-envoye    { background: #cfe3ff; color: #0b4a91; }
 .state-accepte   { background: #cdeccd; color: #1b5e20; }
 .state-refuse    { background: #ffd6d6; color: #8e1414; }
+
+.doc-error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--mat-sys-corner-medium);
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+}
+
+.align-right {
+  text-align: right;
+}

@@ -1,16 +1,9 @@
 import { inject, Service, Signal } from '@angular/core';
 import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
-import { QuoteDetail, QuoteFilters, QuoteRequest, QuoteSummary } from '../models/quotes';
-import { Page } from '../../../core/models/page';
-import { API_URL, idFromLocation } from '../../../core/api';
+import { QuoteDetail, QuoteFilters, QuoteRequest, QuoteSummary } from '../models/quote';
+import { emptyPage, Page } from '../../../core/models/page';
+import { API_URL, cleanParams, idFromLocation, PAGE_SIZE } from '../../../core/api';
 import { map } from 'rxjs';
-
-const PAGE_SIZE = 10;
-
-const EMPTY_PAGE: Page<QuoteSummary> = {
-  content: [],
-  page: { size: PAGE_SIZE, number: 0, totalElements: 0, totalPages: 0}
-};
 
 @Service()
 export class QuoteService {
@@ -24,14 +17,20 @@ export class QuoteService {
     return httpResource<Page<QuoteSummary>>(
       () => ({
         url: `${API_URL}/quote`,
-        params: buildParams(filters()),
+        params: cleanParams({
+          page: filters().page,
+          size: PAGE_SIZE,
+          reference: filters().reference,
+          clientName: filters().clientName,
+          state: filters().state,
+        }),
       }),
-      { defaultValue: EMPTY_PAGE },
+      { defaultValue: emptyPage<QuoteSummary>() },
     );
   }
 
   getQuote(id: Signal<number>) {
-    return httpResource<QuoteDetail>(() => `${API_URL}/quote/${id()}`);
+    return httpResource<QuoteDetail | undefined>(() => `${API_URL}/quote/${id()}`);
   }
 
   send(id: number) {
@@ -54,29 +53,10 @@ export class QuoteService {
   }
 
   create(request: QuoteRequest) {
-    // `observe: 'response'` est indispensable : le corps est vide, tout est
+    // observe: 'response'` est indispensable : le corps est vide, tout est
     // dans les en-têtes.
     return this.http
       .post(`${API_URL}/quote`, request, { observe: 'response' })
       .pipe(map(idFromLocation));
   }
-}
-
-function buildParams(filters: QuoteFilters): Record<string, string | number> {
-  const params: Record<string, string | number> = {
-    page: filters.page,
-    size: PAGE_SIZE,
-  };
-
-  if (filters.reference) {
-    params['reference'] = filters.reference;
-  }
-  if (filters.clientName) {
-    params['clientName'] = filters.clientName;
-  }
-  if (filters.state) {
-    params['state'] = filters.state;
-  }
-
-  return params;
 }

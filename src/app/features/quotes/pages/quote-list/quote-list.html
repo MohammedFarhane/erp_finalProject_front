@@ -29,7 +29,7 @@
   </form>
 
   @if (quotes.error()) {
-    <p class="quotes-error">Impossible de charger les devis</p>
+    <p class="doc-error">Impossible de charger les devis</p>
   }
 
   <table mat-table [dataSource]="quotes.value().content" class="quotes-table">
