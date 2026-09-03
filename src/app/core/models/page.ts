@@ -1,11 +1,11 @@
 export interface Page<T> {
   content: T[];
   page: {
-    size : number;
+    size: number;
     number: number;
     totalElements: number;
     totalPages: number;
-  }
+  };
 }
 
 export interface ProblemDetail {
@@ -17,4 +17,4 @@ export interface ProblemDetail {
 
 export function emptyPage<T>(): Page<T> {
   return { content: [], page: { size: 0, number: 0, totalElements: 0, totalPages: 0 } };
-} 
+}

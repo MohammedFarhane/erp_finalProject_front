@@ -14,7 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './login.html',
 })
 export class Login {
-
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
@@ -47,5 +46,4 @@ export class Login {
       },
     });
   }
-
 }

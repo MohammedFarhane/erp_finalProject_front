@@ -4,7 +4,7 @@ import { LoginRequest, LoginResponse } from '../models/auth';
 import { Observable, tap } from 'rxjs';
 import { LOGIN_URL } from '../api';
 
-const STORAGE_KEY = 'erp_user'
+const STORAGE_KEY = 'erp_user';
 
 @Service()
 export class AuthService {
@@ -14,21 +14,18 @@ export class AuthService {
   readonly isAdmin = computed(() => this.user()?.role === 'ADMIN');
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http
-      .post<LoginResponse>(LOGIN_URL, credentials)
-      .pipe(
-        tap((res) => {
-          this.user.set(res);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(res));
-        }),
-      );
+    return this.http.post<LoginResponse>(LOGIN_URL, credentials).pipe(
+      tap((res) => {
+        this.user.set(res);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(res));
+      }),
+    );
   }
 
   logout(): void {
     this.user.set(null);
     localStorage.removeItem(STORAGE_KEY);
   }
-
 }
 
 function readStoredUser(): LoginResponse | null {

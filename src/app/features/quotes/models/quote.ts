@@ -1,6 +1,6 @@
 import { LineRequest } from '../../../shared/components/line-editor/line-editor';
 
-export type QuoteState = 'BROUILLON' | 'ENVOYE' | 'ACCEPTE' | 'REFUSE'
+export type QuoteState = 'BROUILLON' | 'ENVOYE' | 'ACCEPTE' | 'REFUSE';
 
 export interface QuoteSummary {
   quoteId: number;

@@ -1,5 +1,8 @@
 import { Component, inject, input, numberAttribute, signal } from '@angular/core';
-import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import {
+  ConfirmDialog,
+  ConfirmDialogData,
+} from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { QuoteService } from '../../services/quote-service';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
@@ -23,7 +26,6 @@ import { MatTableModule } from '@angular/material/table';
     MatProgressBarModule,
   ],
   selector: 'app-quote-details',
-  styleUrl: './quote-details.scss',
   templateUrl: './quote-details.html',
 })
 export class QuoteDetails {

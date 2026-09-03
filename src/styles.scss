@@ -48,10 +48,137 @@ body {
   white-space: nowrap;
 }
 
-.state-brouillon { background: #e0e0e0; color: #424242; }
-.state-envoye    { background: #cfe3ff; color: #0b4a91; }
-.state-accepte   { background: #cdeccd; color: #1b5e20; }
-.state-refuse    { background: #ffd6d6; color: #8e1414; }
+.state-brouillon {
+  background: #e0e0e0;
+  color: #424242;
+}
+.state-envoye {
+  background: #cfe3ff;
+  color: #0b4a91;
+}
+.state-accepte {
+  background: #cdeccd;
+  color: #1b5e20;
+}
+.state-refuse {
+  background: #ffd6d6;
+  color: #8e1414;
+}
+
+/* ---------- Habillage commun aux écrans de document ---------- */
+
+.doc-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 60rem;
+}
+
+// Ligne de titre : le filet est ici, pas sur le h1, pour qu'il souligne aussi
+// ce qui accompagne le titre (bouton d'action, pastille d'état).
+.doc-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--mat-sys-primary);
+}
+
+.doc-title {
+  margin: 0;
+  font: var(--mat-sys-headline-small);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.doc-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: fit-content;
+  color: var(--mat-sys-primary);
+  text-decoration: none;
+}
+
+// Bloc de saisie teinté : filtres d'une liste, en-tête d'un formulaire.
+.doc-head,
+.doc-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.25rem 0;
+  border-radius: var(--mat-sys-corner-medium);
+  background: var(--mat-sys-surface-container-low);
+}
+
+.doc-filter mat-form-field {
+  flex: 1 1 12rem;
+}
+
+.doc-table {
+  width: 100%;
+  border-radius: var(--mat-sys-corner-medium);
+  overflow: hidden;
+
+  th {
+    color: var(--mat-sys-on-surface-variant);
+    background: var(--mat-sys-surface-container-low);
+  }
+}
+
+.clickable-row {
+  cursor: pointer;
+
+  &:hover {
+    background: var(--mat-sys-surface-container-high);
+  }
+}
+
+// Blocs d'information et de totaux d'une page de détail.
+.doc-meta,
+.doc-totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--mat-sys-corner-medium);
+  background: var(--mat-sys-surface-container-low);
+
+  dt {
+    font: var(--mat-sys-label-small);
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  dd {
+    margin: 0;
+    font: var(--mat-sys-body-large);
+  }
+}
+
+.doc-totals {
+  justify-content: flex-end;
+}
+
+.doc-total dd {
+  font: var(--mat-sys-title-medium);
+  color: var(--mat-sys-primary);
+}
+
+.doc-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.doc-empty {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+}
 
 .doc-error {
   margin: 0;

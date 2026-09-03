@@ -22,6 +22,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboard/pages/dashboard/dashboard').then((m) => m.Dashboard),
       },
+      //  QUOTES
       {
         path: 'quotes',
         loadComponent: () =>
@@ -37,19 +38,30 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/quotes/pages/quote-details/quote-details').then((m) => m.QuoteDetails),
       },
+      //  BILLINGS
+      {
+        path: 'billings',
+        loadComponent: () =>
+          import('./features/billings/pages/billing-list/billing-list').then((m) => m.BillingList),
+      },
       {
         path: 'billings/new',
         loadComponent: () =>
           import('./features/billings/pages/billing-create/billing-create').then(
-            (m) => m.BillingCreate,
-          ),
+            (m) => m.BillingCreate),
       },
+      {
+        path: 'billings/:id',
+        loadComponent: () =>
+          import('./features/billings/pages/billing-detail/billing-detail').then(
+            (m) => m.BillingDetail),
+      },
+      //  PURCHASE ORDERS
       {
         path: 'purchase-orders/new',
         loadComponent: () =>
           import('./features/purchase-order/pages/purchase-order-create/purchase-order-create').then(
-            (m) => m.PurchaseOrderCreate,
-          ),
+            (m) => m.PurchaseOrderCreate),
       },
     ],
   },

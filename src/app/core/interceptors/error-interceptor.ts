@@ -6,21 +6,17 @@ import { catchError, throwError } from 'rxjs';
 import { LOGIN_URL } from '../api';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return next(req)
-    .pipe(
-      catchError((err: HttpErrorResponse) => {
+  return next(req).pipe(
+    catchError((err: HttpErrorResponse) => {
+      if (err.status === 401 && req.url !== LOGIN_URL) {
+        authService.logout();
+        router.navigate(['/login']);
+      }
 
-        if (err.status === 401 && req.url !== LOGIN_URL) {
-          authService.logout();
-          router.navigate(['/login'])
-        }
-
-        return throwError(() => err);
-
-      }),
-    );
+      return throwError(() => err);
+    }),
+  );
 };

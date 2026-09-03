@@ -1,7 +1,5 @@
-<div class="quote-page">
-  <a routerLink="/quotes" class="quote-back">
-    <mat-icon>arrow_back</mat-icon> Retour à la liste
-  </a>
+<div class="doc-page">
+  <a routerLink="/quotes" class="doc-back"> <mat-icon>arrow_back</mat-icon> Retour à la liste </a>
 
   @if (quote.isLoading()) {
     <mat-progress-bar mode="indeterminate" />
@@ -12,20 +10,32 @@
   }
 
   @if (quote.value(); as q) {
-    <header class="quote-header">
-      <h1>{{ q.reference }}</h1>
+    <header class="doc-header">
+      <h1 class="doc-title">{{ q.reference }}</h1>
       <span class="state-pill" [class]="'state-' + q.state.toLowerCase()">{{ q.state }}</span>
     </header>
 
-    <dl class="quote-meta">
-      <div><dt>Client</dt><dd>{{ q.clientName }}</dd></div>
-      <div><dt>Date</dt><dd>{{ q.quoteDate | date: 'dd/MM/yyyy' }}</dd></div>
-      <div><dt>Expiration</dt><dd>{{ q.expirationDate | date: 'dd/MM/yyyy' }}</dd></div>
+    <dl class="doc-meta">
+      <div>
+        <dt>Client</dt>
+        <dd>{{ q.clientName }}</dd>
+      </div>
+      <div>
+        <dt>Date</dt>
+        <dd>{{ q.quoteDate | date: 'dd/MM/yyyy' }}</dd>
+      </div>
+      <div>
+        <dt>Expiration</dt>
+        <dd>{{ q.expirationDate | date: 'dd/MM/yyyy' }}</dd>
+      </div>
       @if (q.billingId) {
-        <div><dt>Facture</dt><dd>n° {{ q.billingId }}</dd></div>
+        <div>
+          <dt>Facture</dt>
+          <dd>n° {{ q.billingId }}</dd>
+        </div>
       }
     </dl>
-    <table mat-table [dataSource]="q.lines" class="quote-lines">
+    <table mat-table [dataSource]="q.lines" class="doc-table">
       <ng-container matColumnDef="productName">
         <th mat-header-cell *matHeaderCellDef>Produit</th>
         <td mat-cell *matCellDef="let line">{{ line.productName }}</td>
@@ -62,19 +72,31 @@
       <tr mat-row *matRowDef="let row; columns: lineColumns"></tr>
     </table>
 
-    <dl class="quote-totals">
-      <div><dt>Sous-total</dt><dd>{{ q.subTotal | number: '1.2-2' }} €</dd></div>
+    <dl class="doc-totals">
+      <div>
+        <dt>Sous-total</dt>
+        <dd>{{ q.subTotal | number: '1.2-2' }} €</dd>
+      </div>
       <!-- discount est un pourcentage, contrairement à tous les autres champs -->
-      <div><dt>Remise</dt><dd>{{ q.discount | number: '1.0-2' }} %</dd></div>
-      <div><dt>TVA</dt><dd>{{ q.amountTva | number: '1.2-2' }} €</dd></div>
-      <div class="quote-total"><dt>Total</dt><dd>{{ q.totalPrice | number: '1.2-2' }} €</dd></div>
+      <div>
+        <dt>Remise</dt>
+        <dd>{{ q.discount | number: '1.0-2' }} %</dd>
+      </div>
+      <div>
+        <dt>TVA</dt>
+        <dd>{{ q.amountTva | number: '1.2-2' }} €</dd>
+      </div>
+      <div class="doc-total">
+        <dt>Total</dt>
+        <dd>{{ q.totalPrice | number: '1.2-2' }} €</dd>
+      </div>
     </dl>
 
     @if (errorMessage()) {
       <p class="doc-error">{{ errorMessage() }}</p>
     }
 
-    <div class="quote-actions">
+    <div class="doc-actions">
       <button matButton="outlined" type="button" (click)="openPdf()" [disabled]="busy()">
         <mat-icon>picture_as_pdf</mat-icon> Télécharger le PDF
       </button>

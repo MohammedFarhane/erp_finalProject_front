@@ -3,7 +3,9 @@
     <mat-icon>arrow_back</mat-icon> Retour
   </a>
 
-  <h1>{{ config().title }}</h1>
+  <header class="doc-header">
+    <h1 class="doc-title">{{ config().title }}</h1>
+  </header>
 
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />

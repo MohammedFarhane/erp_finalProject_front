@@ -8,4 +8,3 @@ export interface LoginResponse {
   email: string;
   role: 'ADMIN' | 'EMPLOYEE';
 }
-

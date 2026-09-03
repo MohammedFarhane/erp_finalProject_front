@@ -29,7 +29,7 @@ export class BillingCreate {
     title: 'Nouvelle facture',
     partnerLabel: 'Client',
     submitLabel: 'Créer la facture',
-    cancelLink: '/dashboard', // '/billings' quand la liste existera
+    cancelLink: '/billings',
   };
 
   create(value: DocumentFormValue): void {

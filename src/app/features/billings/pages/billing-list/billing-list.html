@@ -1,1 +1,93 @@
-<p>billing-list works!</p>
+<div>
+  <header class="doc-header">
+    <h1 class="doc-title">Factures</h1>
+    <span class="spacer"></span>
+    <a matButton="filled" routerLink="/billings/new"> <mat-icon>add</mat-icon> Nouvelle facture </a>
+  </header>
+
+  <form class="doc-filter" [formGroup]="filterForm">
+    <mat-form-field>
+      <mat-label>Reference</mat-label>
+      <input matInput formControlName="reference" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Client</mat-label>
+      <input matInput formControlName="clientName" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>État</mat-label>
+      <mat-select formControlName="state">
+        <mat-option value="">Tous</mat-option>
+        @for (s of states; track s) {
+          <mat-option [value]="s">{{ s }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  @if (billings.error()) {
+    <p class="doc-error">Impossible de charger les factures</p>
+  }
+
+  <table mat-table [dataSource]="billings.value().content" class="doc-table">
+    <ng-container matColumnDef="reference">
+      <th mat-header-cell *matHeaderCellDef>Référence</th>
+      <td mat-cell *matCellDef="let billing">{{ billing.reference }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="clientName">
+      <th mat-header-cell *matHeaderCellDef>Client</th>
+      <td mat-cell *matCellDef="let billing">{{ billing.clientName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="billingDate">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let billing">{{ billing.billingDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef>État</th>
+      <td mat-cell *matCellDef="let billing">
+        <span class="state-pill" [class]="'state-' + billing.state.toLowerCase()">{{
+            billing.state
+          }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let billing" class="align-right">
+        {{ billing.totalPrice | number: '1.2-2' }} €
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remainingAmount">
+      <th mat-header-cell *matHeaderCellDef>Montant restant</th>
+      <td mat-cell *matCellDef="let billing" class="align-right">
+        {{ billing.remainingAmount | number: '1.2-2' }} €
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: columns"
+      class="clickable-row"
+      [routerLink]="['/billings', row.billingId]"
+    ></tr>
+  </table>
+
+  @if (!billings.isLoading() && billings.value().content.length === 0) {
+    <p class="doc-empty">Aucune facture ne correspond à ces critères.</p>
+  }
+
+  <mat-paginator
+    [length]="billings.value().page.totalElements"
+    [pageSize]="billings.value().page.size"
+    [pageIndex]="billings.value().page.number"
+    [hidePageSize]="true"
+    (page)="onPageChange($event)"
+  />
+</div>
