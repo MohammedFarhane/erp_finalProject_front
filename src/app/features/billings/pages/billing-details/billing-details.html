@@ -1,0 +1,122 @@
+<div class="doc-page">
+  <a routerLink="/billings" class="doc-back"> <mat-icon>arrow_back</mat-icon> Retour à la liste </a>
+
+  @if (billing.isLoading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (billing.error()) {
+    <p class="doc-error">Cette facture est introuvable.</p>
+  }
+
+  @if (billing.value(); as b) {
+    <header class="doc-header">
+      <h1 class="doc-title">{{ b.reference }}</h1>
+      <span class="state-pill" [class]="'state-' + b.state.toLowerCase()">{{ b.state }}</span>
+    </header>
+
+    <dl class="doc-meta">
+      <div>
+        <dt>Client</dt>
+        <dd>{{ b.clientName }}</dd>
+      </div>
+      <div>
+        <dt>Date</dt>
+        <dd>{{ b.billingDate | date: 'dd/MM/yyyy' }}</dd>
+      </div>
+      <div>
+        <dt>Payé</dt>
+        <dd>{{ b.paidAmount | number: '1.2-2' }} €</dd>
+      </div>
+      <div>
+        <dt>Restant dû</dt>
+        <dd>{{ b.remainingAmount | number: '1.2-2' }} €</dd>
+      </div>
+    </dl>
+    <table mat-table [dataSource]="b.lines" class="doc-table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Produit</th>
+        <td mat-cell *matCellDef="let line">{{ line.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef class="align-right">Quantité</th>
+        <td mat-cell *matCellDef="let line" class="align-right">{{ line.quantity }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="unitPrice">
+        <th mat-header-cell *matHeaderCellDef class="align-right">Prix unitaire</th>
+        <td mat-cell *matCellDef="let line" class="align-right">
+          {{ line.unitPrice | number: '1.2-2' }} €
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tvaRate">
+        <th mat-header-cell *matHeaderCellDef class="align-right">TVA</th>
+        <!-- tvaRate est un coefficient : 0.21 s'affiche 21 % -->
+        <td mat-cell *matCellDef="let line" class="align-right">
+          {{ line.tvaRate * 100 | number: '1.0-2' }} %
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalLinePrice">
+        <th mat-header-cell *matHeaderCellDef class="align-right">Total</th>
+        <td mat-cell *matCellDef="let line" class="align-right">
+          {{ line.totalLinePrice | number: '1.2-2' }} €
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="lineColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: lineColumns"></tr>
+    </table>
+
+    <dl class="doc-totals">
+      <div>
+        <dt>Sous-total</dt>
+        <dd>{{ b.subTotal | number: '1.2-2' }} €</dd>
+      </div>
+      <!-- discount est un pourcentage, contrairement à tous les autres champs -->
+      <div>
+        <dt>Remise</dt>
+        <dd>{{ b.discount | number: '1.0-2' }} %</dd>
+      </div>
+      <div>
+        <dt>TVA</dt>
+        <dd>{{ b.amountTva | number: '1.2-2' }} €</dd>
+      </div>
+      <div class="doc-total">
+        <dt>Total</dt>
+        <dd>{{ b.totalPrice | number: '1.2-2' }} €</dd>
+      </div>
+    </dl>
+
+    @if (errorMessage()) {
+      <p class="doc-error">{{ errorMessage() }}</p>
+    }
+
+    <div class="doc-actions">
+      <button matButton="outlined" type="button" (click)="openPdf()" [disabled]="busy()">
+        <mat-icon>picture_as_pdf</mat-icon> Télécharger le PDF
+      </button>
+
+      @switch (b.state) {
+        @case ('BROUILLON') {
+          <button matButton="outlined" type="button" [disabled]="busy()" (click)="cancel()">
+            Annuler
+          </button>
+          <button matButton="filled" type="button" [disabled]="busy()" (click)="validate()">
+            Valider
+          </button>
+        }
+        @case ('VALIDEE') {
+          <button matButton="outlined" type="button" [disabled]="busy()" (click)="cancel()">
+            Annuler
+          </button>
+          <button matButton="filled" type="button" [disabled]="busy()" (click)="pay()">
+            Payer
+          </button>
+        }
+      }
+    </div>
+  }
+</div>

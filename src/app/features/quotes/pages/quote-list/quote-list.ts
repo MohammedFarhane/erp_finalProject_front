@@ -39,8 +39,7 @@ export class QuoteList {
   readonly reference = input('');
   readonly clientName = input('');
   readonly state = input('');
-  readonly page = input(0,
-    { transform: (value: unknown) => numberAttribute(value, 0) });
+  readonly page = input(0, { transform: (value: unknown) => numberAttribute(value, 0) });
 
   readonly quotes = inject(QuoteService).searchQuotes(
     computed(() => ({

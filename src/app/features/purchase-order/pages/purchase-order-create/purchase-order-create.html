@@ -1,9 +1,0 @@
-<app-document-form
-  [config]="config"
-  [partners]="supplier.value().content"
-  [products]="products.value().content"
-  [loading]="supplier.isLoading() || products.isLoading()"
-  [busy]="busy()"
-  [errorMessage]="errorMessage()"
-  (submitted)="create($event)"
-/>

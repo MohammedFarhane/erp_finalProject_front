@@ -32,7 +32,9 @@ export class QuoteDetails {
   private readonly quoteService = inject(QuoteService);
   private readonly dialog = inject(MatDialog);
 
-  readonly id = input.required({ transform: (value: unknown) => numberAttribute(value, 0) });
+  readonly id = input.required({
+    transform: (value: unknown) => numberAttribute(value, 0),
+  });
 
   readonly quote = this.quoteService.getQuote(this.id);
 

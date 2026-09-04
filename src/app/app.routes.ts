@@ -48,20 +48,37 @@ export const routes: Routes = [
         path: 'billings/new',
         loadComponent: () =>
           import('./features/billings/pages/billing-create/billing-create').then(
-            (m) => m.BillingCreate),
+            (m) => m.BillingCreate,
+          ),
       },
       {
         path: 'billings/:id',
         loadComponent: () =>
-          import('./features/billings/pages/billing-detail/billing-detail').then(
-            (m) => m.BillingDetail),
+          import('./features/billings/pages/billing-details/billing-details').then(
+            (m) => m.BillingDetails,
+          ),
       },
       //  PURCHASE ORDERS
       {
+        path: 'purchase-orders',
+        loadComponent: () =>
+          import('./features/purchase-orders/pages/purchase-order-list/purchase-order-list').then(
+            (m) => m.PurchaseOrderList,
+          ),
+      },
+      {
         path: 'purchase-orders/new',
         loadComponent: () =>
-          import('./features/purchase-order/pages/purchase-order-create/purchase-order-create').then(
-            (m) => m.PurchaseOrderCreate),
+          import('./features/purchase-orders/pages/purchase-order-create/purchase-order-create').then(
+            (m) => m.PurchaseOrderCreate,
+          ),
+      },
+      {
+        path: 'purchase-orders/:id',
+        loadComponent: () =>
+          import('./features/purchase-orders/pages/purchase-order-details/purchase-order-details').then(
+            (m) => m.PurchaseOrderDetails,
+          ),
       },
     ],
   },
