@@ -7,3 +7,10 @@ export interface Supplier {
   phone: string;
   address: Address;
 }
+
+export interface SupplierRequest {
+  name: string;
+  email: string;
+  phone: string;
+  address: Address;
+}

@@ -10,3 +10,10 @@ export interface Client {
   addresses: { type: AddressType; address: Address }[];
   billingAddress: Address;
 }
+
+export interface ClientRequest {
+  name: string;
+  email: string;
+  phone: string;
+  address: Address;
+}

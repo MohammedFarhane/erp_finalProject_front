@@ -10,3 +10,13 @@ export interface Product {
   minStockQuantity: number;
   categoryName: string;
 }
+
+export interface ProductRequest {
+  name: string;
+  description: string;
+  purchasePrice: number;
+  sellingPrice: number;
+  tvaRate: number;
+  minStockQuantity: number;
+  categoryId: number;
+}
