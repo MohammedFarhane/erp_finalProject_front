@@ -58,7 +58,7 @@ export const routes: Routes = [
             (m) => m.BillingDetails,
           ),
       },
-      //  PURCHASE ORDERS
+      //  PURCHASE-ORDERS
       {
         path: 'purchase-orders',
         loadComponent: () =>
@@ -79,6 +79,12 @@ export const routes: Routes = [
           import('./features/purchase-orders/pages/purchase-order-details/purchase-order-details').then(
             (m) => m.PurchaseOrderDetails,
           ),
+      },
+      //  PRODUCTS
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./features/products/pages/product-list/product-list').then((m) => m.ProductList),
       },
     ],
   },
