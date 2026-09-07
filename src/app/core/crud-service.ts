@@ -12,24 +12,21 @@ export abstract class CrudService<T, TRequest> {
   protected constructor(protected readonly path: string) {}
 
   protected url(id?: number): string {
-    return id === undefined ? `${API_URL}/${this.path}`
-      : `${API_URL}/${this.path}/${id}`;
+    return id === undefined ? `${API_URL}/${this.path}` : `${API_URL}/${this.path}/${id}`;
   }
 
   search(params: Signal<QueryParams>): HttpResourceRef<Page<T>> {
-    return httpResource<Page<T>>(() => ({ url: this.url(), params:
-          cleanParams(params())}),
-      { defaultValue: emptyPage<T>(),
-      });
+    return httpResource<Page<T>>(() => ({ url: this.url(), params: cleanParams(params()) }), {
+      defaultValue: emptyPage<T>(),
+    });
   }
 
-  getById(id: Signal<number>): HttpResourceRef<T | undefined>  {
+  getById(id: Signal<number>): HttpResourceRef<T | undefined> {
     return httpResource<T | undefined>(() => this.url(id()));
   }
 
   create(request: TRequest): Observable<number> {
-    return this.http.post(this.url(), request, { observe: 'response'})
-      .pipe(map(idFromLocation));
+    return this.http.post(this.url(), request, { observe: 'response' }).pipe(map(idFromLocation));
   }
 
   update(id: number, request: TRequest): Observable<void> {

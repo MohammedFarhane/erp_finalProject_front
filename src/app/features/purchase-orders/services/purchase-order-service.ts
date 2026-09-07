@@ -6,7 +6,7 @@ import {
   PurchaseOrderDetail,
   PurchaseOrderFilters,
   PurchaseOrderRequest,
-  PurchaseOrderSummary
+  PurchaseOrderSummary,
 } from '../models/purchase-order';
 import { emptyPage, Page } from '../../../core/models/page';
 
@@ -24,7 +24,9 @@ export class PurchaseOrderService {
       .pipe(map(idFromLocation));
   }
 
-  searchPurchaseOrders(filters: Signal<PurchaseOrderFilters>): HttpResourceRef<Page<PurchaseOrderSummary>> {
+  searchPurchaseOrders(
+    filters: Signal<PurchaseOrderFilters>,
+  ): HttpResourceRef<Page<PurchaseOrderSummary>> {
     return httpResource<Page<PurchaseOrderSummary>>(
       () => ({
         url: `${API_URL}/purchase-order`,

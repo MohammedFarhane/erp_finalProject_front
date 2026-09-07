@@ -1,5 +1,5 @@
 <mat-toolbar class="shell-toolbar">
-  <span class="shell-brand">ORBIX</span>
+  <a routerLink="/dashboard" class="shell-brand">ORBIX</a>
 
   <span class="shell-spacer"></span>
 
@@ -46,25 +46,24 @@
         <span matListItemTitle>Catégories</span>
       </a>
 
+      <a mat-list-item routerLink="/clients" routerLinkActive="shell-link-active">
+        <mat-icon matListItemIcon>groups</mat-icon>
+        <span matListItemTitle>Clients</span>
+      </a>
+
+      <a mat-list-item routerLink="/suppliers" routerLinkActive="shell-link-active">
+        <mat-icon matListItemIcon>factory</mat-icon>
+        <span matListItemTitle>Fournisseurs</span>
+      </a>
 
       <!-- À décommenter au fur et à mesure que les écrans existent.
 
-        <a mat-list-item routerLink="/clients" routerLinkActive="shell-link-active">
-          <mat-icon matListItemIcon>groups</mat-icon>
-          <span matListItemTitle>Clients</span>
-        </a>
-
-        <a mat-list-item routerLink="/suppliers" routerLinkActive="shell-link-active">
-          <mat-icon matListItemIcon>factory</mat-icon>
-          <span matListItemTitle>Fournisseurs</span>
-        </a>
-
-        @if (isAdmin()) {
-          <a mat-list-item routerLink="/users" routerLinkActive="shell-link-active">
-            <mat-icon matListItemIcon>manage_accounts</mat-icon>
-            <span matListItemTitle>Utilisateurs</span>
-          </a>
-        }-->
+  @if (isAdmin()) {
+    <a mat-list-item routerLink="/users" routerLinkActive="shell-link-active">
+      <mat-icon matListItemIcon>manage_accounts</mat-icon>
+      <span matListItemTitle>Utilisateurs</span>
+    </a>
+  }-->
     </mat-nav-list>
   </nav>
 

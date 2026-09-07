@@ -41,7 +41,10 @@ export function cleanParams(
 // Compte les éléments correspondant à un filtre sans rapatrier de données :
 // `size=1` suffit, seul `page.totalElements` nous intéresse. Une requête
 // minuscule par compteur, et un chiffre exact.
-export function countResource(path: string, params: QueryParams = {}): HttpResourceRef<Page<unknown>> {
+export function countResource(
+  path: string,
+  params: QueryParams = {},
+): HttpResourceRef<Page<unknown>> {
   return httpResource<Page<unknown>>(
     () => ({ url: `${API_URL}/${path}`, params: cleanParams({ ...params, page: 0, size: 1 }) }),
     { defaultValue: emptyPage<unknown>() },

@@ -56,13 +56,7 @@ export class PurchaseOrderList {
     state: [''],
   });
 
-  readonly columns = [
-    'reference',
-    'supplierName',
-    'date',
-    'state',
-    'total'
-  ];
+  readonly columns = ['reference', 'supplierName', 'date', 'state', 'total'];
 
   readonly states: PurchaseOrderState[] = ['EN_ATTENTE', 'ANNULEE', 'RECUE'];
 
@@ -74,7 +68,7 @@ export class PurchaseOrderList {
           supplierName: this.supplierName(),
           state: this.state(),
         },
-        { emitEvent: false},
+        { emitEvent: false },
       );
     });
 

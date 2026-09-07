@@ -1,3 +1,4 @@
+import { DialogDrag } from '../../directives/DialogDrag';
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +10,7 @@ export interface ConfirmDialogData {
 }
 
 @Component({
-  imports: [MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule, DialogDrag],
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.html',
 })

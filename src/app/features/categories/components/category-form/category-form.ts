@@ -1,3 +1,4 @@
+import { DialogDrag } from '../../../../shared/directives/DialogDrag';
 import { Component, inject } from '@angular/core';
 import { Category } from '../../models/category';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,6 +18,7 @@ export interface CategoryFormData {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    DialogDrag,
   ],
   selector: 'app-category-form',
   styleUrl: './category-form.scss',

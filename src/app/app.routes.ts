@@ -90,8 +90,25 @@ export const routes: Routes = [
       {
         path: 'categories',
         loadComponent: () =>
-          import('./features/categories/pages/category-list/category-list').then((m) => m.CategoryList),
+          import('./features/categories/pages/category-list/category-list').then(
+            (m) => m.CategoryList,
+          ),
       },
+      //  CLIENTS
+      {
+        path: 'clients',
+        loadComponent: () =>
+          import('./features/clients/pages/client-list/client-list').then((m) => m.ClientList),
+      },
+      //  SUPPLIERS
+      {
+        path: 'suppliers',
+        loadComponent: () =>
+          import('./features/suppliers/pages/supplier-list/supplier-list').then(
+            (m) => m.SupplierList,
+          ),
+      },
+      // USERS
     ],
   },
   {

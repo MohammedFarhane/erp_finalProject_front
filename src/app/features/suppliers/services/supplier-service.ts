@@ -6,7 +6,7 @@ import { HttpResourceRef } from '@angular/common/http';
 import { CrudService } from '../../../core/crud-service';
 
 @Service()
-export class SupplierService extends CrudService<Supplier, SupplierRequest>{
+export class SupplierService extends CrudService<Supplier, SupplierRequest> {
   constructor() {
     super('supplier');
   }

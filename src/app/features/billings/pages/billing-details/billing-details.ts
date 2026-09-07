@@ -57,8 +57,7 @@ export class BillingDetails {
       message: 'Êtes vous sur ?',
       confirmLabel: 'Confirmer',
     }).subscribe((confirmed) => {
-      if (confirmed)
-        this.runTransition(this.billingService.cancel(this.id()));
+      if (confirmed) this.runTransition(this.billingService.cancel(this.id()));
     });
   }
 

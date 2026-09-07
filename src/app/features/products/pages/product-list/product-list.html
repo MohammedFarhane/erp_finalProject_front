@@ -12,7 +12,7 @@
   <form class="doc-filter" [formGroup]="filterForm">
     <mat-form-field>
       <mat-label>Nom</mat-label>
-      <input matInput formControlName="name">
+      <input matInput formControlName="name" />
     </mat-form-field>
 
     <mat-form-field>
@@ -57,8 +57,8 @@
         {{ product.stock }}
         @if (product.stock < product.minStockQuantity) {
           <span class="stock-low" [title]="'Seuil : ' + product.minStockQuantity">
-              à réapprovisionner
-            </span>
+            à réapprovisionner
+          </span>
         }
       </td>
     </ng-container>
@@ -67,26 +67,15 @@
       <th mat-header-cell *matHeaderCellDef class="align-right"></th>
       <td mat-cell *matCellDef="let product" class="align-right">
         @if (isAdmin()) {
-          <button
-            matIconButton
-            type="button"
-            aria-label="Modifier"
-            (click)="openForm(product)"
-          >
+          <button matIconButton type="button" aria-label="Modifier" (click)="openForm(product)">
             <mat-icon>edit_note</mat-icon>
           </button>
-          <button
-            matIconButton
-            type="button"
-            aria-label="Archiver"
-            (click)="remove(product)"
-          >
+          <button matIconButton type="button" aria-label="Archiver" (click)="remove(product)">
             <mat-icon>delete</mat-icon>
           </button>
         }
       </td>
     </ng-container>
-
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>

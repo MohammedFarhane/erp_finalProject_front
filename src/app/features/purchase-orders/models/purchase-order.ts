@@ -39,6 +39,3 @@ export interface PurchaseOrderFilters {
   state: string;
   page: number;
 }
-
-
-

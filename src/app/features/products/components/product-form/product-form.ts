@@ -1,3 +1,4 @@
+import { DialogDrag } from '../../../../shared/directives/DialogDrag';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -22,11 +23,11 @@ export interface ProductFormData {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    DialogDrag,
   ],
   templateUrl: './product-form.html',
   styleUrl: './product-form.scss',
 })
-
 export class ProductForm {
   private readonly fb = inject(FormBuilder);
 
@@ -53,8 +54,7 @@ export class ProductForm {
         sellingPrice: product.sellingPrice,
         tvaRate: product.tvaRate,
         minStockQuantity: product.minStockQuantity,
-        categoryId: this.data.categories.find((c) => c.name ===
-          product.categoryName)?.id ?? 0,
+        categoryId: this.data.categories.find((c) => c.name === product.categoryName)?.id ?? 0,
       });
     }
   }

@@ -1,0 +1,58 @@
+<h2 mat-dialog-title appDialogDrag>{{ data.title }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="partner-form">
+    <mat-form-field class="span-4">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name" cdkFocusInitial />
+      <mat-error>Le nom est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="span-2">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error>Email valide requis.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="span-2">
+      <mat-label>Téléphone</mat-label>
+      <input matInput formControlName="phone" />
+      <mat-error>Le téléphone est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <h3 class="form-section">Adresse</h3>
+
+    <ng-container formGroupName="address">
+      <mat-form-field class="span-3">
+        <mat-label>Rue</mat-label>
+        <input matInput formControlName="street" />
+        <mat-error>Obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="span-1">
+        <mat-label>N°</mat-label>
+        <input matInput formControlName="number" />
+        <mat-error>Obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="span-1">
+        <mat-label>Code postal</mat-label>
+        <input matInput formControlName="postalCode" />
+        <mat-error>Obligatoire.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="span-3">
+        <mat-label>Localité</mat-label>
+        <input matInput formControlName="locality" />
+        <mat-error>Obligatoire.</mat-error>
+      </mat-form-field>
+    </ng-container>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button matButton="text" matDialogClose>Annuler</button>
+  <button matButton="filled" [disabled]="form.invalid" [mat-dialog-close]="form.getRawValue()">
+    Enregistrer
+  </button>
+</mat-dialog-actions>

@@ -1,3 +1,4 @@
+import { DialogDrag } from '../../directives/DialogDrag';
 import { Component, inject } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,6 +23,7 @@ export interface PaymentDialogData {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    DialogDrag,
   ],
   selector: 'app-payment-dialog',
   templateUrl: './payment-dialog.html',

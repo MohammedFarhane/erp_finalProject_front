@@ -7,7 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PurchaseOrderService } from '../../services/purchase-order-service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import {
+  ConfirmDialog,
+  ConfirmDialogData,
+} from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { map, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PurchaseOrderDetail } from '../../models/purchase-order';

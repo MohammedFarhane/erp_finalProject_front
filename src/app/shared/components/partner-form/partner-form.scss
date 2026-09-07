@@ -1,0 +1,29 @@
+.partner-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 1rem;
+  width: 100%;
+}
+
+.span-1 {
+  grid-column: span 1;
+}
+.span-2 {
+  grid-column: span 2;
+}
+.span-3 {
+  grid-column: span 3;
+}
+.span-4 {
+  grid-column: span 4;
+}
+
+// Sépare le bloc contact du bloc adresse sans ajouter de trait lourd.
+.form-section {
+  grid-column: 1 / -1;
+  margin: 0.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  font: var(--mat-sys-title-small);
+  color: var(--mat-sys-on-surface-variant);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}

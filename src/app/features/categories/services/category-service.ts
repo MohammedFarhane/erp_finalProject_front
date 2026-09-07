@@ -4,15 +4,12 @@ import { httpResource, HttpResourceRef } from '@angular/common/http';
 import { Service } from '@angular/core';
 
 @Service()
-export class CategoryService extends CrudService<Category, CategoryRequest>{
+export class CategoryService extends CrudService<Category, CategoryRequest> {
   constructor() {
     super('category');
   }
 
   listAll(): HttpResourceRef<Category[]> {
-    return httpResource<Category[]>(() => this.url(),
-      { defaultValue: [] });
+    return httpResource<Category[]>(() => this.url(), { defaultValue: [] });
   }
-
-
 }
