@@ -44,4 +44,36 @@
   <app-state-bar label="Devis" [slices]="quotes()" link="/quotes" />
   <app-state-bar label="Factures" [slices]="billings()" link="/billings" />
   <app-state-bar label="Commandes fournisseur" [slices]="orders()" link="/purchase-orders" />
+
+  <section class="finance">
+    <div class="finance-head">
+      <h2 class="finance-title">Mouvements</h2>
+      <span class="finance-note">Montants TTC</span>
+    </div>
+
+    <div class="finance-grid">
+      <dl class="finance-block">
+        <h3 class="finance-label">Entrées</h3>
+        <div><dt>Total facturé</dt><dd>{{ finance().invoiced | number: '1.2-2' }}
+          €</dd></div>
+        <div><dt>Encaissé</dt><dd>{{ finance().collected | number: '1.2-2' }} €</dd></div>
+        <div><dt>Restant dû</dt><dd>{{ finance().outstanding | number: '1.2-2' }}
+          €</dd></div>
+      </dl>
+
+      <dl class="finance-block">
+        <h3 class="finance-label">Sorties</h3>
+        <div><dt>Total commandé</dt><dd>{{ finance().ordered | number: '1.2-2' }}
+          €</dd></div>
+      </dl>
+
+      <dl class="finance-block finance-balance" [class.finance-negative]="finance().balance < 0">
+        <h3 class="finance-label">Solde</h3>
+        <div>
+          <dt>Encaissé − commandé</dt>
+          <dd>{{ finance().balance | number: '1.2-2' }} €</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
 </div>
