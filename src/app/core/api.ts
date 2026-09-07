@@ -1,6 +1,7 @@
 import { environment } from '../../environments/environment';
 import { httpResource, HttpResourceRef, HttpResponse } from '@angular/common/http';
 import { emptyPage, Page } from './models/page';
+import { QueryParams } from './crud-service';
 
 const LIST_ALL_SIZE = 100;
 export const PAGE_SIZE = 10;
@@ -35,4 +36,14 @@ export function cleanParams(
   return Object.fromEntries(
     Object.entries(params).filter(([, value]) => value !== undefined && value !== ''),
   ) as Record<string, string | number>;
+}
+
+// Compte les éléments correspondant à un filtre sans rapatrier de données :
+// `size=1` suffit, seul `page.totalElements` nous intéresse. Une requête
+// minuscule par compteur, et un chiffre exact.
+export function countResource(path: string, params: QueryParams = {}): HttpResourceRef<Page<unknown>> {
+  return httpResource<Page<unknown>>(
+    () => ({ url: `${API_URL}/${path}`, params: cleanParams({ ...params, page: 0, size: 1 }) }),
+    { defaultValue: emptyPage<unknown>() },
+  );
 }

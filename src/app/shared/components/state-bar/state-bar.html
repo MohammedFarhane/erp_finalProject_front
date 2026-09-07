@@ -1,0 +1,29 @@
+<div class="chart-head">
+  <h2 class="chart-title">{{ label() }}</h2>
+  <span class="chart-total">{{ total() }} au total</span>
+</div>
+
+<div class="bar">
+  @for (slice of slices(); track slice.state) {
+    @if (slice.count > 0) {
+      <a
+        class="bar-part"
+        [class]="'state-' + slice.state.toLowerCase()"
+        [style.flex-grow]="slice.count"
+        [routerLink]="link()"
+        [queryParams]="{ state: slice.state }"
+        [title]="slice.state + ' : ' + slice.count"
+      >
+        {{ slice.count }}
+      </a>
+    }
+  }
+</div>
+
+<div class="legend">
+  @for (slice of slices(); track slice.state) {
+    <span class="state-pill" [class]="'state-' + slice.state.toLowerCase()">
+        {{ slice.state }} · {{ slice.count }}
+      </span>
+  }
+</div>
