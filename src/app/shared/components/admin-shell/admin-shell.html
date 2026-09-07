@@ -41,6 +41,12 @@
         <span matListItemTitle>Produits</span>
       </a>
 
+      <a mat-list-item routerLink="/categories" routerLinkActive="shell-link-active">
+        <mat-icon matListItemIcon>category</mat-icon>
+        <span matListItemTitle>Catégories</span>
+      </a>
+
+
       <!-- À décommenter au fur et à mesure que les écrans existent.
 
         <a mat-list-item routerLink="/clients" routerLinkActive="shell-link-active">
@@ -51,11 +57,6 @@
         <a mat-list-item routerLink="/suppliers" routerLinkActive="shell-link-active">
           <mat-icon matListItemIcon>factory</mat-icon>
           <span matListItemTitle>Fournisseurs</span>
-        </a>
-
-        <a mat-list-item routerLink="/categories" routerLinkActive="shell-link-active">
-          <mat-icon matListItemIcon>category</mat-icon>
-          <span matListItemTitle>Catégories</span>
         </a>
 
         @if (isAdmin()) {

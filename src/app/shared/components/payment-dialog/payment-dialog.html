@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Encaisser un paiement</h2>
+
+<mat-dialog-content>
+  <p>Facture {{ data.reference }} — solde {{ data.remainingAmount | number: '1.2-2' }} €</p>
+
+  <form [formGroup]="form" class="doc-form">
+    <mat-form-field>
+      <mat-label>Montant</mat-label>
+      <input matInput type="number" step="0.01" formControlName="amount" />
+      <span matTextSuffix>€</span>
+      <mat-error>Montant invalide : entre 0,01 et le solde.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Méthode</mat-label>
+      <mat-select formControlName="method">
+        @for (m of methods; track m) {
+          <mat-option [value]="m">{{ m }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button matButton="text" mat-dialog-close cdkFocusInitial>Annuler</button>
+  <button matButton="filled" [disabled]="form.invalid" [mat-dialog-close]="form.getRawValue()">
+    Encaisser
+  </button>
+</mat-dialog-actions>
