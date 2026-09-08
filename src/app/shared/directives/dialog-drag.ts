@@ -4,7 +4,7 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
 @Directive({
   selector: '[appDialogDrag]',
   hostDirectives: [CdkDrag],
-  host: { style: 'cursor: move; user-select: none' },
+  host: { class: 'dialog-drag' },
 })
 export class DialogDrag {
   constructor() {

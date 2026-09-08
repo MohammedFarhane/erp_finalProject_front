@@ -1,4 +1,4 @@
-import { DialogDrag } from '../../../../shared/directives/DialogDrag';
+import { DialogDrag } from '../../../../shared/directives/dialog-drag';
 import { Component, inject } from '@angular/core';
 import { Category } from '../../models/category';
 import { MatFormFieldModule } from '@angular/material/form-field';

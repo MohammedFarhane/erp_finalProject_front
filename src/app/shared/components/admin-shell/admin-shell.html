@@ -11,6 +11,10 @@
     <mat-icon>logout</mat-icon>
     Déconnexion
   </button>
+  <button matButton="text" type="button" (click)="changePassword()">
+    <mat-icon>key</mat-icon>
+    Mot de passe
+  </button>
 </mat-toolbar>
 
 <div class="shell-body">
@@ -56,14 +60,12 @@
         <span matListItemTitle>Fournisseurs</span>
       </a>
 
-      <!-- À décommenter au fur et à mesure que les écrans existent.
-
-  @if (isAdmin()) {
-    <a mat-list-item routerLink="/users" routerLinkActive="shell-link-active">
-      <mat-icon matListItemIcon>manage_accounts</mat-icon>
-      <span matListItemTitle>Utilisateurs</span>
-    </a>
-  }-->
+      @if(isAdmin()){
+        <a mat-list-item routerLink="/users" routerLinkActive="shell-link-active">
+          <mat-icon matListItemIcon>manage_accounts</mat-icon>
+          <span matListItemTitle>Utilisateurs</span>
+        </a>
+      }
     </mat-nav-list>
   </nav>
 

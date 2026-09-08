@@ -1,0 +1,44 @@
+<h2 mat-dialog-title appDialogDrag>
+  {{ isEdit ? "Modifier l'utilisateur" : "Ajouter un utilisateur" }}
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="user-form">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name" cdkFocusInitial />
+      <mat-error>Le nom est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" cdkFocusInitial />
+      <mat-error>Email requis.</mat-error>
+    </mat-form-field>
+
+    @if (!isEdit) {
+      <mat-form-field>
+        <mat-label>Mot de Passe</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="new-password" />
+        <mat-hint>Huit caractères minimum</mat-hint>
+        <mat-error>Huit caractères minimum.</mat-error>
+      </mat-form-field>
+    }
+
+    <mat-form-field>
+      <mat-label>Rôle</mat-label>
+      <mat-select formControlName="role">
+        @for (role of roles; track role) {
+          <mat-option [value]="role">{{ role }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button matButton="text" mat-dialog-close>Annuler</button>
+  <button matButton="filled" type="button" [disabled]="form.invalid" (click)="submit()">
+    {{ isEdit ? 'Enregistrer' : 'créer' }}
+  </button>
+</mat-dialog-actions>

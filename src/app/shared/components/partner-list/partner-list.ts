@@ -1,4 +1,4 @@
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,6 +27,7 @@ export interface Partner {
 export interface PartnerListConfig {
   title: string;
   singularName: string;
+  adminOnly?: boolean;
 }
 
 @Component({
@@ -50,6 +51,7 @@ export class PartnerList {
   private readonly dialog = inject(MatDialog);
 
   readonly isAdmin = inject(AuthService).isAdmin;
+  readonly canWrite = computed(() => !this.config().adminOnly || this.isAdmin());
 
   readonly config = input.required<PartnerListConfig>();
   readonly service = input.required<CrudService<Partner, PartnerRequest>>();

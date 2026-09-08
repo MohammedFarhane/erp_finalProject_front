@@ -1,4 +1,4 @@
-import { DialogDrag } from '../../directives/DialogDrag';
+import { DialogDrag } from '../../directives/dialog-drag';
 import { Component, inject } from '@angular/core';
 import { Address } from '../../../core/models/address';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';

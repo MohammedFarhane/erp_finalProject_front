@@ -21,8 +21,6 @@ export class SupplierList {
   readonly email = input('');
   readonly page = input(0, { transform: (value: unknown) => numberAttribute(value, 0) });
 
-  // Construite ici et non dans le composant partagé : un initialiseur de champ
-  // est un contexte d'injection, ce dont httpResource a besoin.
   readonly partners = this.supplierService.search(
     computed(() => ({
       page: this.page(),
@@ -32,9 +30,7 @@ export class SupplierList {
     })),
   );
 
-  readonly config: PartnerListConfig = { title: 'Fournisseurs', singularName: 'fournisseur' };
+  readonly config: PartnerListConfig = { title: 'Fournisseurs', singularName: 'fournisseur', adminOnly: true };
 
-  // Le fournisseur range son adresse dans `address`, le client dans
-  // `billingAddress` : c'est la seule différence entre les deux écrans.
   readonly addressOf = (partner: Partner): Address => (partner as Supplier).address;
 }

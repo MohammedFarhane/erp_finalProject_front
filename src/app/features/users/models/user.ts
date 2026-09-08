@@ -4,8 +4,8 @@ export interface User {
   id: number;
   name: string;
   email: string;
-  password: string;
-  role: string;
+  role: UserRole;
+  archived: boolean;
 }
 
 export interface UserRequest {
@@ -13,4 +13,15 @@ export interface UserRequest {
   email: string;
   password: string;
   role: UserRole;
+}
+
+export interface UserUpdateRequest {
+  name: string;
+  email: string;
+  role: UserRole;
+}
+
+export interface ChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
 }

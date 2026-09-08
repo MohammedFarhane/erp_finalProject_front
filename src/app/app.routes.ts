@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard';
+import { adminGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
   {
@@ -104,11 +105,15 @@ export const routes: Routes = [
       {
         path: 'suppliers',
         loadComponent: () =>
-          import('./features/suppliers/pages/supplier-list/supplier-list').then(
-            (m) => m.SupplierList,
-          ),
+          import('./features/suppliers/pages/supplier-list/supplier-list').then((m) => m.SupplierList),
       },
       // USERS
+      {
+        path: 'users',
+        canActivate: [adminGuard],
+        loadComponent: () =>
+          import('./features/users/pages/user-list/user-list').then((m) => m.UserList),
+      },
     ],
   },
   {

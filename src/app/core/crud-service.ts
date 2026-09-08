@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
 
 export type QueryParams = Record<string, string | number | undefined>;
 
-export abstract class CrudService<T, TRequest> {
+export abstract class CrudService<T, TCreate, TUpdate = TCreate> {
   protected readonly http = inject(HttpClient);
 
   protected constructor(protected readonly path: string) {}
@@ -25,11 +25,11 @@ export abstract class CrudService<T, TRequest> {
     return httpResource<T | undefined>(() => this.url(id()));
   }
 
-  create(request: TRequest): Observable<number> {
+  create(request: TCreate): Observable<number> {
     return this.http.post(this.url(), request, { observe: 'response' }).pipe(map(idFromLocation));
   }
 
-  update(id: number, request: TRequest): Observable<void> {
+  update(id: number, request: TUpdate): Observable<void> {
     return this.http.put<void>(this.url(id), request);
   }
 

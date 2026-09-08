@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangePassword } from '../../../features/users/components/change-password/change-password';
 
 @Component({
   imports: [
@@ -23,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class AdminShell {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
 
   readonly user = this.authService.user;
   readonly isAdmin = this.authService.isAdmin;
@@ -30,5 +33,9 @@ export class AdminShell {
   logout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/login');
+  }
+
+  changePassword(): void {
+    this.dialog.open(ChangePassword, {width: '28rem'});
   }
 }

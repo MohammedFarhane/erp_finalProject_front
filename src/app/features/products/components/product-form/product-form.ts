@@ -1,4 +1,4 @@
-import { DialogDrag } from '../../../../shared/directives/DialogDrag';
+import { DialogDrag } from '../../../../shared/directives/dialog-drag';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';

@@ -28,7 +28,7 @@
       <span class="tile-label">Factures impayées</span>
     </a>
 
-    <a class="tile" routerLink="/purchse-orders" [queryParams]="{ state: 'VALIDEE' }">
+    <a class="tile" routerLink="/purchase-orders" [queryParams]="{ state: 'EN_ATTENTE' }">
       <mat-icon>local_shipping</mat-icon>
       <span class="tile-value">{{ ordersPending.value().page.totalElements }}</span>
       <span class="tile-label">Commande en attentes</span>
@@ -45,35 +45,37 @@
   <app-state-bar label="Factures" [slices]="billings()" link="/billings" />
   <app-state-bar label="Commandes fournisseur" [slices]="orders()" link="/purchase-orders" />
 
-  <section class="finance">
-    <div class="finance-head">
-      <h2 class="finance-title">Mouvements</h2>
-      <span class="finance-note">Montants TTC</span>
-    </div>
+  @if (isAdmin()) {
+    <section class="finance">
+      <div class="finance-head">
+        <h2 class="finance-title">Mouvements</h2>
+        <span class="finance-note">Montants TTC</span>
+      </div>
 
-    <div class="finance-grid">
-      <dl class="finance-block">
-        <h3 class="finance-label">Entrées</h3>
-        <div><dt>Total facturé</dt><dd>{{ finance().invoiced | number: '1.2-2' }}
-          €</dd></div>
-        <div><dt>Encaissé</dt><dd>{{ finance().collected | number: '1.2-2' }} €</dd></div>
-        <div><dt>Restant dû</dt><dd>{{ finance().outstanding | number: '1.2-2' }}
-          €</dd></div>
-      </dl>
+      <div class="finance-grid">
+        <dl class="finance-block">
+          <h3 class="finance-label">Entrées</h3>
+          <div><dt>Total facturé</dt><dd>{{ finance().invoiced | number: '1.2-2' }}
+            €</dd></div>
+          <div><dt>Encaissé</dt><dd>{{ finance().collected | number: '1.2-2' }} €</dd></div>
+          <div><dt>Restant dû</dt><dd>{{ finance().outstanding | number: '1.2-2' }}
+            €</dd></div>
+        </dl>
 
-      <dl class="finance-block">
-        <h3 class="finance-label">Sorties</h3>
-        <div><dt>Total commandé</dt><dd>{{ finance().ordered | number: '1.2-2' }}
-          €</dd></div>
-      </dl>
+        <dl class="finance-block">
+          <h3 class="finance-label">Sorties</h3>
+          <div><dt>Total commandé</dt><dd>{{ finance().ordered | number: '1.2-2' }}
+            €</dd></div>
+        </dl>
 
-      <dl class="finance-block finance-balance" [class.finance-negative]="finance().balance < 0">
-        <h3 class="finance-label">Solde</h3>
-        <div>
-          <dt>Encaissé − commandé</dt>
-          <dd>{{ finance().balance | number: '1.2-2' }} €</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
+        <dl class="finance-block finance-balance" [class.finance-negative]="finance().balance < 0">
+          <h3 class="finance-label">Solde</h3>
+          <div>
+            <dt>Encaissé − commandé</dt>
+            <dd>{{ finance().balance | number: '1.2-2' }} €</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  }
 </div>

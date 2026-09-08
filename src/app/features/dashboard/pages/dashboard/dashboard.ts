@@ -7,6 +7,7 @@ import { StateBar, StateSlice } from '../../../../shared/components/state-bar/st
 import { DecimalPipe } from '@angular/common';
 import { BillingSummary } from '../../../billings/models/billing';
 import { PurchaseOrderSummary } from '../../../purchase-orders/models/purchase-order';
+import { AuthService } from '../../../../core/services/auth-service';
 
 @Component({
   imports: [RouterLink, MatIconModule, StateBar, DecimalPipe],
@@ -16,6 +17,8 @@ import { PurchaseOrderSummary } from '../../../purchase-orders/models/purchase-o
 })
 
 export class Dashboard {
+  protected readonly isAdmin = inject(AuthService).isAdmin;
+
   readonly quotesToProcess = countResource('quote', { state: 'ENVOYE' });
   readonly quoteDrafts = countResource('quote', { state: 'BROUILLON' });
   readonly billingsToValidate = countResource('billing', { state: 'BROUILLON' });

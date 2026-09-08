@@ -185,3 +185,13 @@ body {
 .align-right {
   text-align: right;
 }
+
+//grab
+.dialog-drag {
+  cursor: grab;
+  user-select: none;
+}
+
+.dialog-drag:active {
+  cursor: grabbing;
+}

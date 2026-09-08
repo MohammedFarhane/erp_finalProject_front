@@ -1,4 +1,4 @@
-import { DialogDrag } from '../../directives/DialogDrag';
+import { DialogDrag } from '../../directives/dialog-drag';
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
