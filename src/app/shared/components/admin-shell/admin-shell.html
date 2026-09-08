@@ -1,5 +1,7 @@
 <mat-toolbar class="shell-toolbar">
-  <a routerLink="/dashboard" class="shell-brand">ORBIX</a>
+  <a routerLink="/dashboard" class="shell-brand">
+    <img src="/image/ORBIX_sansfavicon.png" alt="Orbix" class="shell-logo">
+  </a>
 
   <span class="shell-spacer"></span>
 
@@ -7,13 +9,13 @@
     <span class="shell-email">{{ connected.email }}</span>
   }
 
-  <button matButton="text" type="button" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-    Déconnexion
-  </button>
   <button matButton="text" type="button" (click)="changePassword()">
     <mat-icon>key</mat-icon>
     Mot de passe
+  </button>
+  <button matButton="text" type="button" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Déconnexion
   </button>
 </mat-toolbar>
 

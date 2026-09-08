@@ -36,6 +36,6 @@ export class AdminShell {
   }
 
   changePassword(): void {
-    this.dialog.open(ChangePassword, {width: '28rem'});
+    this.dialog.open(ChangePassword, { width: '28rem' });
   }
 }
